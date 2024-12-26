@@ -19,31 +19,14 @@ This project demonstrates advanced Kubernetes networking capabilities by impleme
 
 ## 🏗️ Project Architecture
 
-```mermaid
-graph LR
-    subgraph "namespace-b"
-        B[BusyBox Pod]
-    end
-    
-    subgraph "DNS Resolution"
-        DNS[CoreDNS]
-    end
-    
-    subgraph "namespace-a"
-        S[Service:<br/>nginx-service<br/>ClusterIP]
-        P[Nginx Pod]
-    end
-    
-    B -- "DNS Query:<br/>nginx-service.namespace-a.svc.cluster.local" --> DNS
-    DNS -- "Returns Service ClusterIP" --> B
-    B -- "HTTP Request to ClusterIP" --> S
-    S -- "Routes to Pod" --> P
-    
-    style B fill:#f9f,stroke:#333
-    style S fill:#69f,stroke:#333
-    style P fill:#9cf,stroke:#333
-    style DNS fill:#fc9,stroke:#333
-```
+<figure style="text-align: center; margin: 20px 0;">
+  <img src="./architecture.png" 
+       alt="Kubernetes cross-namespace communication architecture showing a BusyBox pod in namespace-b accessing an Nginx pod in namespace-a through Kubernetes DNS and ClusterIP service" 
+       style="max-width: 100%; height: auto; margin-bottom: 10px;" />
+  <figcaption style="font-style: italic; color: #666;">
+    Cross-Namespace Communication Architecture: BusyBox pod accessing Nginx service across namespaces via Kubernetes DNS
+  </figcaption>
+</figure>
 
 The architecture demonstrates how a BusyBox Pod in `namespace-b` can communicate with an Nginx service in `namespace-a` using Kubernetes DNS resolution.
 
