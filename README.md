@@ -1,0 +1,1 @@
+# k8s-cross-namespace-access
